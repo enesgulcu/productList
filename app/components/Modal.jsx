@@ -17,7 +17,7 @@ export default function Modal({ isOpen, onClose, children }) {
       <div className="relative bg-white p-1 rounded-lg shadow-lg z-10 max-h-[80vh] overflow-auto">
         {children}
         <button
-          className="absolute text-lg top-0 right-0 m-4 text-red-700 hover:text-gray-900"
+          className="absolute text-lg top-0 right-0 m-4 text-red-700 hover:text-gray-900 scale-150"
           onClick={onClose}
         >
           &times;

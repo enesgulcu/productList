@@ -106,10 +106,7 @@ export default function DataList() {
         throw new Error("API hatası: " + response.status);
       }
       const data = await response.json();
-      const filtered = data.data.filter(
-        (item) => item.STKOZKOD1 === "A" || item.STKOZKOD1 === "bayi"
-      );
-      setProducts(filtered);
+      setProducts(data.data);
     } catch (error) {
       console.error("Veri çekme hatası: ", error);
     }
@@ -176,6 +173,7 @@ export default function DataList() {
     reader.onerror = () => {
       setMessage("Failed to read file");
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedFile]);
 
   async function deleteImage(filePath, stkkod) {
@@ -303,7 +301,7 @@ export default function DataList() {
             </thead>
             <tbody className="text-left divide-y min-w-96 divide-gray-100">
               {paginatedProducts &&
-                paginatedProducts.map((product, index) => {
+                paginatedProducts.map((product) => {
                   const image =
                     jsonImages && jsonImages.length > 0
                       ? jsonImages.find((e) => e.stkkod === product.STKKOD)
@@ -346,11 +344,10 @@ export default function DataList() {
                               />
                             </div>
                             <Modal isOpen={isModalOpen} onClose={closeModal}>
-                              <img
+                              <Image
                                 src={selectedImage}
                                 alt="Selected"
-                                className="max-h-[80vh] w-auto"
-                              />
+                                className="max-h-[80vh] w-auto"                              />
                             </Modal>
                             <DeleteModal
                               isOpen={isDeleteModalOpen}
